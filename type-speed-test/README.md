@@ -18,3 +18,7 @@ Features to Add:
 * Fetch random words from an API
 * Ability to share on social media
 * Enhance difficulty by matching with upper and lower case letters
+
+Todo:
+
+* Implement code using Inheritance (Class) and make code DRY
