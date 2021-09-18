@@ -11,3 +11,10 @@ Current Features:
 * Result indicator showing current game status through a message
 * A timer to keep track of count down in seconds
 * Ability to resest the score and restart the game 
+
+Current Features:
+
+* Show high score by storing it in local storage
+* Fetch random words from an API
+* Ability to share on social media
+* Enhance difficulty by matching with upper and lower case letters
