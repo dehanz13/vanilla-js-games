@@ -12,7 +12,7 @@ Current Features:
 * A timer to keep track of count down in seconds
 * Ability to resest the score and restart the game 
 
-Current Features:
+Features to Add:
 
 * Show high score by storing it in local storage
 * Fetch random words from an API
