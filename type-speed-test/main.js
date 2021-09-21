@@ -1,4 +1,5 @@
 /*  TODO:
+		- add usernames
     - show high score -> by storing it in local storage
     - fetch random words from an API
  */
@@ -89,10 +90,18 @@ const levels = {
 };
 
 let currentLevel = levels.noob;
-let timeCount = currentLevel + 1,
-  scoreCount = 0,
-  isPlaying,
-  wordDisplayed;
+let timeCount = currentLevel + 1;
+let scoreCount = 0;
+let isPlaying = false;
+let wordDisplayed;
+
+let noobHighScore = 0;
+let proHighScore = 0;
+let hackerHighScore = 0;
+let godHighScore = 0;
+let HIGH_SCORES = "highScores";
+let NO_OF_HIGH_SCORES = 10;
+let HIGHEST_SCORE;
 
 let currentWord = document.querySelector("#current-word");
 let inputWord = document.querySelector("#input-word");
@@ -102,10 +111,22 @@ let score = document.querySelector("#score");
 let message = document.querySelector("#message");
 let difficultyLevel = document.querySelector("#difficulty");
 
+// Accordion for Instructions
+let accordionHeaders = document.querySelectorAll(".accordion-item-header");
+let accordionBodies = document.querySelectorAll(".accordion-item-body");
+
 // EVENT LISTENERS
 window.addEventListener("load", init);
 inputWord.addEventListener("input", startMatch);
 difficultyLevel.addEventListener("change", changeLevel);
+accordionHeaders.forEach((item) => {
+  item.addEventListener("click", (e) => {
+    itemHeader = e.target;
+    itemBody = e.target.nextElementSibling;
+    itemHeader.classList.toggle("active");
+    itemBody.classList.toggle("hide");
+  });
+});
 
 // FUNCTIONS
 function init() {
@@ -117,6 +138,15 @@ function init() {
   setInterval(countdown, 1000);
   // check the game status for every 0.1s
   setInterval(checkStatus, 100);
+  // display high score
+  // setInterval(checkHighScore(highestScore), 3000);
+  // checkHighScore(highestScore)
+  // showHighScores();
+  // let highscores = getHighScoreFromLS();
+
+  accordionBodies.forEach((item) => {
+    item.classList.add("hide");
+  });
 }
 
 function showWord() {
@@ -137,6 +167,7 @@ function countdown() {
 function checkStatus() {
   if (!isPlaying && timeCount === 0) {
     message.textContent = "Time is up!";
+    HIGHEST_SCORE = scoreCount;
     scoreCount = 0;
     message.className = "mt-3 text-danger";
   }
@@ -155,12 +186,18 @@ function startMatch() {
     this.value = "";
     // set new score
     scoreCount++;
+    HIGHEST_SCORE = scoreCount;
+    // console.log("SCORE COUNT = " + scoreCount);
+    // console.log("HIGHEST SCORE COUNT = " + highestScore);
     score.textContent = scoreCount;
+    // // add score to high score list
+    // checkHighScore(scoreCount);
     // set time count back to default to reset the game
     timeCount = currentLevel + 1;
     // display a different word
     showWord();
   }
+  checkStatus();
 }
 
 function changeLevel() {
@@ -210,4 +247,57 @@ function changeLevel() {
   }
 }
 
-function displayHighScore() {}
+function showHighScores() {
+  let highScores = JSON.parse(localStorage.getItem(HIGH_SCORES)) ?? [];
+  let highScoreList = document.getElementById("highScores");
+  console.log(HIGHEST_SCORE);
+  // highScoreList.innerHTML = highScores
+  //   .map((score) => `<li>${score.score} - ${score.name}</li>`)
+  //   .join("");
+}
+
+function checkHighScore(score) {
+  let highScoreString = localStorage.getItem(HIGH_SCORES);
+  let highScores = JSON.parse(highScoreString) ?? [];
+  let lowestScore = highScores[NO_OF_HIGH_SCORES - 1]?.score ?? 0;
+
+  if (score > lowestScore) {
+    saveHighScore(score, highScores); // TODO
+    showHighScores(); // TODO
+  }
+}
+
+function saveHighScore(score, highScores) {
+  // let name = prompt("You got a highscore! Enter name: ");
+  let name = "TEST1";
+  let newScore = { score, name };
+
+  // 1. Add to list
+  highScores.push(newScore);
+
+  // 2. Sort the list
+  highScores.sort((a, b) => (b.score = a.score));
+
+  // 3. Select new list
+  highScores.splice(NO_OF_HIGH_SCORES);
+
+  // 4. Save to local storage
+  localStorage.setItem(HIGH_SCORES, JSON.stringify(highScores));
+}
+
+function gameOver() {
+  // Other game over logic
+
+  checkHighScore(account.score);
+}
+
+function getHighScoreFromLS() {
+  if (localStorage.getItem(HIGH_SCORES) == null) {
+    localStorage.setItem(HIGH_SCORES, "[]");
+    return JSON.parse(localStorage.getItem(HIGH_SCORES));
+  } else {
+    return localStorage.getItem(HIGH_SCORES);
+  }
+}
+
+function addHighScoreToLS(difficulty, score) {}

@@ -21,6 +21,65 @@ main {
   padding-top: 2rem;
   margin-bottom: 2rem;
 }
+table,
+th,
+td {
+  border: 1px solid #ccc;
+  border-collapse: collapse;
+  margin: 0;
+  padding: 1em;
+  width: 100%;
+  table-layout: fixed;
+}
+.accordion {
+  width: 90%;
+  max-width: 1000px;
+  margin: 2rem auto;
+}
+.accordion-item {
+  /* background: white; */
+  /* color: #111; */
+  margin: 1rem 0;
+  border: 1px solid;
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.25);
+}
+.accordion-item-header {
+  padding: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  position: relative;
+}
+.accordion-item-header::after {
+  content: "+";
+  position: absolute;
+  right: 1rem;
+  top: 0;
+  font-size: 2.5rem;
+  font-weight: 400;
+}
+.accordion-item-header.active::after {
+  content: "-";
+}
+.accordioon-item-body {
+  transform: all 0.3s ease;
+  padding: 1rem;
+  margin-left: 0 !important;
+}
+.accordion-item-body.hide {
+  display: none;
+}
+.accordion-item-body-title {
+  padding: 1rem;
+}
+.accordion-item-body-content {
+  padding: 1rem;
+  line-height: 1.5;
+}
+.accordion-item-body-content > ul > li {
+  padding: 0 !important;
+  margin-left: 0 !important;
+}
 .form-group {
   margin-bottom: 1rem;
 }

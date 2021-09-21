@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <meta name="author" content="Danniel Hansel" />
+    <title>Tic Tac Toe Game</title>
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+      integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://bootswatch.com/5/sketchy/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="main.js" defer></script>
+  </head>
+
+  <body>
+    <header>
+      <h1 class="text-center p-3 mb-5">
+        <i class="fas fa-times me-4"></i>Tic Tac Toe<i
+          class="far fa-circle ms-4"
+        ></i>
+      </h1>
+    </header>
+    <main>
+      <!-- <div class="row col-md-6 mx-auto"></div> -->
+      <div class="board" id="board">
+        <div class="cell" data-cell></div>
+        <div class="cell" data-cell></div>
+        <div class="cell" data-cell></div>
+        <div class="cell" data-cell></div>
+        <div class="cell" data-cell></div>
+        <div class="cell" data-cell></div>
+        <div class="cell" data-cell></div>
+        <div class="cell" data-cell></div>
+        <div class="cell" data-cell></div>
+      </div>
+    </main>
+    <div class="winning-message" id="messageModal">
+      <div data-winning-message-text></div>
+      <button id="restartBtn" type="button">Restart</button>
+    </div>
+    <footer class="footer">
+      <p class="text-center">
+        Code Written By:
+        <a
+          href="https://github.com/dehanz13"
+          class="text-decoration-none"
+          rel="noopener noreferrer"
+          target="_blank"
+          >Danniel Hansel</a
+        >
+      </p>
+    </footer>
+  </body>
+</html>
